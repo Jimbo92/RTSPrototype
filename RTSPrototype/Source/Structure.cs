@@ -13,10 +13,12 @@ namespace RTSPrototype
 {
     class Structure
     {
-        public void Draw(SpriteBatch sb, Game1 getGame1, Vector2 getPosition)
+        public Vector2 Position;
+
+        public void Draw(SpriteBatch sb, Game1 getGame1)
         {
-            Rectangle Destination = new Rectangle((int)getPosition.X, (int)getPosition.Y, 32, 32);
-            sb.Draw(getGame1.TreeTexture, Destination, Color.White);
+                    Rectangle Destination = new Rectangle((int)Position.X, (int)Position.Y, 32, 32);
+                    sb.Draw(getGame1.TreeTexture, Destination, Color.White);
         }
     }
 }
