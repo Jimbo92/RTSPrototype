@@ -89,20 +89,27 @@ namespace RTSPrototype
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.F12))
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 StreamWriter sw = new StreamWriter("file.txt");
 
-                int[] Rows = new int[(int)MapSize.X];
-
-                foreach(int row in Rows) 
+                for (int i = 0; i < GridData.GetLength(0); i++)
                 {
-                    foreach (int data in GridData)
+                
+                    int[] linelist = new int[GridData.GetLength(1)];
+                    for (int j = 0; j < linelist.GetLength(0); j++)
                     {
-                        sw.Write(data + ",");
+                        linelist[j] = GridData[i, j];
+                        int line = linelist[j];
+                        sw.Write(line);
+                        if(j != linelist.GetLength(0) - 1)
+                        sw.Write(",");
+                       
                     }
-                    sw.WriteLine(); 
+                    sw.WriteLine();
+                  
                 }
+                
                 sw.Close();
             }
 
