@@ -33,7 +33,7 @@ namespace RTSPrototype
         public int TileSize = 32;
 
         Vector2 ScreenSize = new Vector2(800, 600);
-        public Vector2 MapSize = new Vector2(50, 100);
+        public Vector2 MapSize = new Vector2(20, 10);
 
         public Vector2 Camera = Vector2.Zero;
         Vector2 CameraSpeed = Vector2.Zero;
@@ -84,27 +84,27 @@ namespace RTSPrototype
             // TODO: Unload any non ContentManager content here
         }
 
-        public void Save()
-        {
-            string[] index = new string[(int)MapSize.X + (int)MapSize.Y];
-
-            int[,] StoreMap = new int[GridData.GetLength(0), GridData.GetLength(1)];
-
-            File.WriteAllLines("writeText.txt", index);
-        }
-
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            StreamWriter sw = new StreamWriter("file.txt");
-            foreach (int row in GridData)
+            if (Keyboard.GetState().IsKeyDown(Keys.F12))
             {
-                    sw.Write("," + row);
-                //sw.WriteLine("");
+                StreamWriter sw = new StreamWriter("file.txt");
+
+                int[] Rows = new int[(int)MapSize.X];
+
+                foreach(int row in Rows) 
+                {
+                    foreach (int data in GridData)
+                    {
+                        sw.Write(data + ",");
+                    }
+                    sw.WriteLine(); 
+                }
+                sw.Close();
             }
-            sw.Close();
 
 
             CursorPosition = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 1, 1);
